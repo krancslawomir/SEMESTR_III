@@ -106,6 +106,9 @@ inflacja_cpi <- sapply(dokumenty, function(x) x[which(str_detect(x,'CPI inflatio
 inflacja_cpi
 
 
+# zamienimy teraz tekst na datę. W tym celu zmienimy daty na anglosaskie:
+Sys.setlocale("LC_TIME", "C")
+
 
 # Linijki dokumentów połączmy teraz w jedną obserwację.
 dokumenty[[1]]
@@ -120,13 +123,23 @@ head(dok_df)
 dok_df$rok <- data_publikacji
 dok_df$miesiac <- data_publikacji
 
+
+
 # tworzenie kolumn roku i miesiąca wraz z danymi
-dok_df$rok <- as.Date(data_publikacji, format = '%d %B %Y')
+dok_df$rok <- as.Date(data_publikacji, '%d %B %Y')
+dok_df$rok <- str_extract(data_publikacji, '20[0-2][0-9]')
+
 dok_df$miesiac <- as.Date(data_publikacji, '%d %B %Y')
+dok_df$miesiac <- str_extract(data_publikacji, "\\s.*\\s")
+
 dok_df$stopa_referencyjna <- stopa_referencyjna
+
 dok_df$stopa_lombardowa <- stopa_lombardowa
+
 dok_df$stopa_depozytowa <- stopa_depozytowa
+
 dok_df$stopa_redyskonta <- stopa_redyskonta
+
 dok_df
 
 # Tabela
