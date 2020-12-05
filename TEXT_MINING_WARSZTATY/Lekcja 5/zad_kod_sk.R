@@ -1,3 +1,4 @@
+### Sławomir Kranc ###
 # Ścieżka dostępu - uwaga należy wpisać indywidualną!
 setwd('C:/Users/SK/Documents')
 
